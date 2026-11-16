@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTwin | AI Vision, Digital Twin & Generative Intelligence for Circular Waste Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #080C14;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --bg-elevated: #1F2937;
+            --border-dim: rgba(75, 85, 99, 0.35);
+            --border-bright: rgba(56, 189, 248, 0.3);
+            
+            --emerald: #10B981;
+            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --blue: #3B82F6;
+            --cyan: #06B6D4;
+            --amber: #F59E0B;
+            --red: #EF4444;
+            --purple: #8B5CF6;
+            
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --text-dim: #64748B;
+            
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 60%, rgba(59, 130, 246, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8, 12, 20, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 16px 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .logo-box {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(59, 130, 246, 0.25));
+            border: 1px solid var(--emerald);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px var(--emerald-glow);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .brand-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            background: var(--emerald);
+            color: #064E3B;
+            padding: 2px 7px;
+            border-radius: 999px;
+            margin-left: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--emerald), #059669);
+            color: #FFFFFF;
+            box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-bright);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: var(--cyan);
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--emerald);
+            margin-bottom: 24px;
+        }
+
+        .pulse-light {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--emerald);
+            box-shadow: 0 0 10px var(--emerald);
+            animation: pulseAnim 1.8s infinite;
+        }
+
+        @keyframes pulseAnim {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.4); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 22px;
+            background: linear-gradient(135deg, #FFFFFF 30%, #94A3B8 70%, #38BDF8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 820px;
+            margin: 0 auto 36px auto;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 50px;
+        }
+
+        /* Metric Ticker */
+        .ticker-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            background: rgba(17, 24, 39, 0.6);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(12px);
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        .ticker-card {
+            text-align: center;
+            border-right: 1px solid var(--border-dim);
+        }
+
+        .ticker-card:last-child {
+            border-right: none;
+        }
+
+        .ticker-num {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .ticker-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        /* Section Commons */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--cyan);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+            margin-bottom: 12px;
+        }
+
+        .section-desc {
+            max-width: 680px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Problem Statement Grid */
+        .problem-section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-dim);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .problem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 16px;
+            padding: 32px 24px;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.12);
+        }
+
+        .problem-icon-wrap {
+            width: 52px;
+            height: 52px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--red);
+            margin-bottom: 20px;
+        }
+
+        .problem-stat {
+            font-size: 1.8rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            color: var(--red);
+            margin-bottom: 8px;
+        }
+
+        .problem-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .problem-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+            margin-bottom: 18px;
+            flex: 1;
+        }
+
+        .problem-bullet {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 12px;
+        }
+
+        /* Pillars Section */
+        .pillars-section {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid var(--border-dim);
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 18px;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--card-accent, var(--emerald));
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--card-accent, var(--emerald));
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .pillar-icon-wrap {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .pillar-badge {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
+            color: var(--card-accent, var(--emerald));
+        }
+
+        .pillar-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .pillar-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .pillar-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+            flex: 1;
+        }
+
+        .pillar-features li {
+            font-size: 0.85rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .pillar-features li svg {
+            flex-shrink: 0;
+            color: var(--card-accent, var(--emerald));
+            margin-top: 3px;
+        }
+
+        /* Live Studio Interactive Showcase */
+        .studio-section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-dim);
+        }
+
+        .studio-wrapper {
+            background: #0D1322;
+            border: 1px solid var(--border-dim);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .studio-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 8px 16px;
+            gap: 8px;
+        }
+
+        .studio-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .studio-tab-btn.active {
+            background: var(--blue);
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .studio-body {
+            padding: 30px;
+            min-height: 480px;
+        }
+
+        .studio-panel {
+            display: none;
+        }
+
+        .studio-panel.active {
+            display: block;
+        }
+
+        /* Interactive CV Demo inside Landing Page */
+        .demo-cv-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .demo-sample-tray {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+        }
+
+        .demo-chip {
+            flex-shrink: 0;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 8px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .demo-chip:hover, .demo-chip.active {
+            border-color: var(--emerald);
+            background: rgba(16, 185, 129, 0.15);
+            color: #FFFFFF;
+        }
+
+        .demo-viewport {
+            background: #080C14;
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-results-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Interactive Twin Canvas inside Landing Page */
+        .demo-twin-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+        }
+
+        .demo-canvas-wrap {
+            background: #080C14;
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            height: 420px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #demoTwinCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Calculator Section */
+        .calc-section {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.25);
+            border-top: 1px solid var(--border-dim);
+        }
+
+        .calc-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 20px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            backdrop-filter: blur(14px);
+        }
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .slider-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .slider-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .slider-val-badge {
+            font-family: var(--font-mono);
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 999px;
+            background: #1F2937;
+            accent-color: var(--emerald);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .calc-output-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.08));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .calc-stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .calc-stat-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 14px;
+            border: 1px solid var(--border-dim);
+        }
+
+        .calc-stat-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            display: block;
+        }
+
+        .calc-stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        /* Architecture / Tech Stack */
+        .tech-section {
+            padding: 80px 0;
+            border-top: 1px solid var(--border-dim);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .tech-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .tech-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .tech-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .tech-role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            padding: 90px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-dim);
+            background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.12) 0%, transparent 60%);
+        }
+
+        .cta-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .cta-desc {
+            max-width: 600px;
+            margin: 0 auto 32px auto;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border-dim);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .hero-title { font-size: 2.4rem; }
+            .problem-grid, .pillars-grid, .ticker-bar, .tech-grid, .calc-box, .demo-cv-layout, .demo-twin-layout {
+                grid-template-columns: 1fr;
+            }
+            .ticker-card { border-right: none; border-bottom: 1px solid var(--border-dim); padding-bottom: 14px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="container nav-inner">
+            <a href="/" class="brand-logo">
+                <div class="logo-box">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#10B981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        <circle cx="12" cy="12" r="5" fill="#10B981" fill-opacity="0.3"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="brand-title">EcoTwin <span class="brand-tag">2.0</span></span>
+                </div>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#problem">The Crisis</a></li>
+                <li><a href="#pillars">3 Core Pillars</a></li>
+                <li><a href="#demo">Live Studio Demo</a></li>
+                <li><a href="#calculator">ROI Calculator</a></li>
+                <li><a href="#tech">Tech Architecture</a></li>
+            </ul>
+
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <a href="/dashboard" class="btn btn-primary">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    Launch Command Center
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">
+                <span class="pulse-light"></span> PROBLEM STATEMENT &bull; AI-POWERED SOLUTION ARCHITECTURE
+            </div>
+
+            <h1 class="hero-title">
+                Autonomous Computer Vision, Digital Twin &amp;<br>
+                Generative AI for Circular Waste Management
+            </h1>
+
+            <p class="hero-desc">
+                Addressing the 2.01-billion-ton municipal waste crisis through deep optical polymer classification, 
+                high-fidelity cyber-physical ecosystem modeling, and generative dispatch intelligence to maximize circular recovery.
+            </p>
+
+            <div class="hero-cta-group">
+                <a href="/dashboard" class="btn btn-primary" style="padding: 12px 28px; font-size: 1rem;">
+                    🚀 Open Live Command Center
+                </a>
+                <a href="#demo" class="btn btn-outline" style="padding: 12px 24px; font-size: 1rem;">
+                    👁️ Test Live Interactive Demo
+                </a>
+            </div>
+
+            <!-- Ticker Stats -->
+            <div class="ticker-bar">
+                <div class="ticker-card">
+                    <span class="ticker-num" style="color: var(--emerald);">78.8%</span>
+                    <span class="ticker-label">Diversion Rate</span>
+                </div>
+                <div class="ticker-card">
+                    <span class="ticker-num" style="color: var(--cyan);">142.8 t</span>
+                    <span class="ticker-label">CO₂e Emissions Saved</span>
+                </div>
+                <div class="ticker-card">
+                    <span class="ticker-num" style="color: var(--amber);">&lt; 4%</span>
+                    <span class="ticker-label">Contamination Rate</span>
+                </div>
+                <div class="ticker-card">
+                    <span class="ticker-num" style="color: var(--blue);">100%</span>
+                    <span class="ticker-label">Overflow Avoidance</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement Section -->
+    <section id="problem" class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">THE PROBLEM STATEMENT</span>
+                <h2 class="section-title">The Three Crippling Bottlenecks of Modern Waste Systems</h2>
+                <p class="section-desc">
+                    Municipalities spend up to 50% of operating budgets on waste collection, yet over 33% remains mismanaged, 
+                    creating ecological hazards, carbon surges, and severe economic losses.
+                </p>
+            </div>
+
+            <div class="problem-grid">
+                <!-- Bottleneck 1 -->
+                <div class="problem-card">
+                    <div class="problem-icon-wrap">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    </div>
+                    <div class="problem-stat">38% Contamination</div>
+                    <h3 class="problem-title">Purity Degradation &amp; Pulp Ruin</h3>
+                    <p class="problem-desc">
+                        Citizens unknowingly discard food-greased cardboard (pizza boxes) or non-recyclable multi-layer foil packaging into clean streams. 
+                        A single contaminated item ruins entire 5-ton pulping batches, forcing secondary diversion directly into landfills.
+                    </p>
+                    <div class="problem-bullet">
+                        <strong>Impact:</strong> \$180 Billion in recyclable commodity value discarded annually.
+                    </div>
+                </div>
+
+                <!-- Bottleneck 2 -->
+                <div class="problem-card">
+                    <div class="problem-icon-wrap">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    </div>
+                    <div class="problem-stat">42% Wasted Fuel</div>
+                    <h3 class="problem-title">Static, Blind Collection Routes</h3>
+                    <p class="problem-desc">
+                        Municipal diesel compactor fleets run fixed calendar-based schedules regardless of actual fill levels. Trucks visit half-empty bins, burning fuel and emitting heavy greenhouse gases, while overflowing bins in busy sectors cause curb spillage and pest infestations.
+                    </p>
+                    <div class="problem-bullet">
+                        <strong>Impact:</strong> Over 1.6 gigatons of CO₂e emitted by municipal collection fleets.
+                    </div>
+                </div>
+
+                <!-- Bottleneck 3 -->
+                <div class="problem-card">
+                    <div class="problem-icon-wrap">
+                        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <div class="problem-stat">1,400+ Fires / Year</div>
+                    <h3 class="problem-title">Lithium-Ion &amp; E-Waste Thermal Hazards</h3>
+                    <p class="problem-desc">
+                        Small electronic toys, vape pens, and swollen smartphone lithium-ion batteries end up undetected in municipal compactor bins. 
+                        The crushing force of hydraulic truck compactors ruptures battery cells, sparking catastrophic fires on transit routes.
+                    </p>
+                    <div class="problem-bullet">
+                        <strong>Impact:</strong> Severe worker injury risks and million-dollar vehicle write-offs.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Core Pillars Section -->
+    <section id="pillars" class="pillars-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">THE ECOTWIN SOLUTION</span>
+                <h2 class="section-title">The Three Integrated Pillars of Intelligence</h2>
+                <p class="section-desc">
+                    By merging Computer Vision, Digital Twin modeling, and Generative AI, EcoTwin closes the loop from citizen binning to industrial sorting and circular recycling.
+                </p>
+            </div>
+
+            <div class="pillars-grid">
+                <!-- Pillar 1 -->
+                <div class="pillar-card" style="--card-accent: #3B82F6;">
+                    <div class="pillar-icon-wrap" style="background: rgba(59, 130, 246, 0.15); color: #3B82F6;">
+                        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </div>
+                    <span class="pillar-badge">Pillar 1 &bull; Visual Perception</span>
+                    <h3 class="pillar-title">Computer Vision Sorter</h3>
+                    <p class="pillar-desc">
+                        Multi-spectral visual object detection classifying waste into 8 precise resin & material categories with millimeter-level bounding box localization.
+                    </p>
+                    <ul class="pillar-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Resin Identification:</strong> Distinguishes PET (#1), HDPE (#2), PP (#5), Aluminum, OCC fiber.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Contamination Analysis:</strong> Flags grease saturation, mold, and residual liquids.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>MRF Optical Sorter Stream:</strong> Simulates high-speed conveyor belts with laser tracking & pneumatic air-jet ejection.</span>
+                        </li>
+                    </ul>
+                    <a href="/dashboard" class="btn btn-outline btn-sm">Explore Vision Scanner &rarr;</a>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="pillar-card" style="--card-accent: #10B981;">
+                    <div class="pillar-icon-wrap" style="background: rgba(16, 185, 129, 0.15); color: #10B981;">
+                        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M2 12h20"/></svg>
+                    </div>
+                    <span class="pillar-badge">Pillar 2 &bull; Cyber-Physical Modeling</span>
+                    <h3 class="pillar-title">Digital Twin Ecosystem</h3>
+                    <p class="pillar-desc">
+                        A real-time geospatial model of municipal waste flows, tracking 24 IoT smart bins, 4 dynamic fleet vehicles, and 4 specialized processing centers.
+                    </p>
+                    <ul class="pillar-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>IoT Sensor Fusion:</strong> Live ultrasonic fill levels, internal temperatures, and lid tilt sensors.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Dynamic Fleet Routing:</strong> Electric & Bio-CNG trucks dispatch autonomously based on real-time fill velocity.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Scenario Perturbations:</strong> Injects Rush Hours, Festivals, and Rain Contamination events.</span>
+                        </li>
+                    </ul>
+                    <a href="/dashboard" class="btn btn-outline btn-sm">View Digital Twin Map &rarr;</a>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="pillar-card" style="--card-accent: #8B5CF6;">
+                    <div class="pillar-icon-wrap" style="background: rgba(139, 92, 246, 0.15); color: #8B5CF6;">
+                        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
+                    </div>
+                    <span class="pillar-badge">Pillar 3 &bull; Autonomous Reasoning</span>
+                    <h3 class="pillar-title">Generative AI Copilot</h3>
+                    <p class="pillar-desc">
+                        Powered by Google Gemini 1.5 Flash and domain knowledge models to generate strategic recommendations, citizen nudges, and execute operations.
+                    </p>
+                    <ul class="pillar-features">
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Capacitated Vehicle Routing (CVRP):</strong> Optimal clustering saving thousands of liters of fuel.</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Circular Economics:</strong> Calculates secondary commodity resale value (\$380/t rPET flakes).</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span><strong>Interactive Copilot Chat:</strong> Grounded in live telemetry with one-click automated dispatch actions.</span>
+                        </li>
+                    </ul>
+                    <a href="/dashboard" class="btn btn-outline btn-sm">Consult EcoTwin Copilot &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Live Studio Showcase -->
+    <section id="demo" class="studio-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">LIVE INTERACTIVE STUDIO</span>
+                <h2 class="section-title">Experience the Technology in Action</h2>
+                <p class="section-desc">
+                    Test the Computer Vision classifier, observe real-time fleet movement on the Digital Twin canvas, 
+                    and interact with the GenAI engine right here.
+                </p>
+            </div>
+
+            <div class="studio-wrapper">
+                <div class="studio-tabs">
+                    <button class="studio-tab-btn active" onclick="switchStudioTab('cv-tab')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                        1. Computer Vision Sorter
+                    </button>
+                    <button class="studio-tab-btn" onclick="switchStudioTab('twin-tab')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M2 12h20"/></svg>
+                        2. Digital Twin Canvas
+                    </button>
+                    <button class="studio-tab-btn" onclick="switchStudioTab('copilot-tab')">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
+                        3. GenAI Strategy Engine
+                    </button>
+                </div>
+
+                <div class="studio-body">
+                    <!-- Tab 1: CV Demo -->
+                    <div id="cv-tab" class="studio-panel active">
+                        <div class="demo-sample-tray">
+                            <span style="font-size: 0.8rem; color: var(--text-muted); align-self: center;">Select Sample Item:</span>
+                            <div class="demo-chip active" onclick="loadDemoSample('pet')">🧴 PET Water Bottle</div>
+                            <div class="demo-chip" onclick="loadDemoSample('alu')">🥤 Aluminum Can</div>
+                            <div class="demo-chip" onclick="loadDemoSample('pizza')">🍕 Greasy Pizza Box (Contaminated)</div>
+                            <div class="demo-chip" onclick="loadDemoSample('battery')">⚡ Swollen Li-Ion Battery (HAZARD)</div>
+                            <div class="demo-chip" onclick="loadDemoSample('chips')">🍟 Multi-layer Chip Bag</div>
+                        </div>
+
+                        <div class="demo-cv-layout">
+                            <div class="demo-viewport" id="demo-cv-viewport">
+                                <!-- Rendered dynamically -->
+                            </div>
+
+                            <div class="demo-results-card" id="demo-cv-results">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Digital Twin Demo -->
+                    <div id="twin-tab" class="studio-panel">
+                        <div class="demo-twin-layout">
+                            <div class="demo-canvas-wrap">
+                                <canvas id="demoTwinCanvas" width="700" height="420"></canvas>
+                            </div>
+                            <div class="demo-results-card">
+                                <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main);">Live Ecosystem Telemetry</h3>
+                                <p style="font-size: 0.82rem; color: var(--text-muted);">Real-time monitoring of 24 smart IoT bins across 5 sectors and 4 autonomous collection trucks.</p>
+                                
+                                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                        <span class="text-muted">Diversion Rate:</span>
+                                        <strong style="color: var(--emerald);">78.8%</strong>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                        <span class="text-muted">Active Fleet:</span>
+                                        <strong style="color: var(--blue);">2 / 4 Trucks En Route</strong>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                        <span class="text-muted">Critical Overflows:</span>
+                                        <strong style="color: var(--amber);">2 Bins (&gt;85%)</strong>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 16px;">
+                                    <button class="btn btn-primary btn-sm" onclick="triggerDemoDispatch()" style="width: 100%; justify-content: center;">
+                                        ⚡ Trigger CVRP Auto-Dispatch
+                                    </button>
+                                </div>
+                                <div style="margin-top: 10px;">
+                                    <a href="/dashboard" class="btn btn-outline btn-sm" style="width: 100%; justify-content: center;">
+                                        Open Full Screen Digital Twin &rarr;
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Copilot Demo -->
+                    <div id="copilot-tab" class="studio-panel">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                            <div class="demo-results-card">
+                                <h4 style="color: var(--cyan); font-size: 0.85rem; text-transform: uppercase;">Strategic Recommendation</h4>
+                                <h3 style="font-size: 1.15rem; font-weight: 700;">Predictive CVRP Corridor Optimization</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                                    Detected 2 bins at critical capacity in Sector 1 &amp; 2. Dispatching TRUCK-01 on an optimal nearest-neighbor loop bypasses 11 non-critical bins.
+                                </p>
+                                <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; font-size: 0.82rem; border-left: 3px solid var(--emerald);">
+                                    🎯 <strong>Projected Impact:</strong> -24.8 km fleet travel &bull; 6.9 Liters diesel saved &bull; 18.5 kg CO₂e avoided
+                                </div>
+                            </div>
+
+                            <div class="demo-results-card">
+                                <h4 style="color: var(--amber); font-size: 0.85rem; text-transform: uppercase;">Citizen Nudge Protocol</h4>
+                                <h3 style="font-size: 1.15rem; font-weight: 700;">Contamination Alert in Downtown Sector</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                                    Computer Vision flagged high grease contamination on cardboard. Recommended action: Push automated mobile push notification on takeout box separation.
+                                </p>
+                                <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; font-size: 0.82rem; border-left: 3px solid var(--blue);">
+                                    🎯 <strong>Projected Impact:</strong> +6.4% fiber purity &bull; Rejection drop of 42% at Apex MRF
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Municipal ROI & Carbon Calculator -->
+    <section id="calculator" class="calc-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">PROJECTED MUNICIPAL IMPACT</span>
+                <h2 class="section-title">Circular Economy ROI &amp; Carbon Calculator</h2>
+                <p class="section-desc">
+                    Estimate the ecological and economic benefits of deploying EcoTwin across your city or district.
+                </p>
+            </div>
+
+            <div class="calc-box">
+                <div class="slider-group">
+                    <!-- Slider 1 -->
+                    <div class="slider-item">
+                        <div class="slider-label-row">
+                            <span>Metropolitan Population</span>
+                            <span class="slider-val-badge" id="val-pop">500,000 citizens</span>
+                        </div>
+                        <input type="range" id="range-pop" min="50000" max="3000000" step="50000" value="500000" oninput="updateCalculator()">
+                    </div>
+
+                    <!-- Slider 2 -->
+                    <div class="slider-item">
+                        <div class="slider-label-row">
+                            <span>Municipal Collection Fleet</span>
+                            <span class="slider-val-badge" id="val-fleet">35 Trucks</span>
+                        </div>
+                        <input type="range" id="range-fleet" min="5" max="150" step="5" value="35" oninput="updateCalculator()">
+                    </div>
+
+                    <!-- Slider 3 -->
+                    <div class="slider-item">
+                        <div class="slider-label-row">
+                            <span>Current Baseline Recycling Rate</span>
+                            <span class="slider-val-badge" id="val-rec">28% Baseline</span>
+                        </div>
+                        <input type="range" id="range-rec" min="10" max="60" step="2" value="28" oninput="updateCalculator()">
+                    </div>
+                </div>
+
+                <!-- Calculator Output -->
+                <div class="calc-output-card">
+                    <div>
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--emerald); text-transform: uppercase;">Projected Annual Gains</span>
+                        <h3 style="font-size: 1.4rem; font-weight: 800; margin-top: 4px; margin-bottom: 20px;">EcoTwin System Performance</h3>
+                    </div>
+
+                    <div class="calc-stat-row">
+                        <div class="calc-stat-block">
+                            <span class="calc-stat-val text-emerald" id="calc-diverted" style="color: var(--emerald);">+48,500 t</span>
+                            <span class="calc-stat-lbl">Annual Waste Diverted</span>
+                        </div>
+                        <div class="calc-stat-block">
+                            <span class="calc-stat-val text-cyan" id="calc-carbon" style="color: var(--cyan);">65,400 tCO₂e</span>
+                            <span class="calc-stat-lbl">Carbon Emissions Saved</span>
+                        </div>
+                        <div class="calc-stat-block">
+                            <span class="calc-stat-val text-blue" id="calc-fuel" style="color: var(--blue);">$410,000</span>
+                            <span class="calc-stat-lbl">Fleet Fuel Saved</span>
+                        </div>
+                        <div class="calc-stat-block">
+                            <span class="calc-stat-val text-amber" id="calc-revenue" style="color: var(--amber);">$3.85 Million</span>
+                            <span class="calc-stat-lbl">Secondary Material Resale</span>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.8rem; color: var(--text-dim); text-align: center;">
+                        Based on \$380/t rPET, \$1,250/t aluminum, and 2.68 kg CO₂e saved per liter of diesel conserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Architecture -->
+    <section id="tech" class="tech-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">ENGINEERING FOUNDATION</span>
+                <h2 class="section-title">Built with Production-Grade Technologies</h2>
+                <p class="section-desc">
+                    Engineered for high-frequency IoT streaming, computer vision inference, and generative agent reasoning.
+                </p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <span class="tech-icon">👁️</span>
+                    <h3 class="tech-name">Computer Vision</h3>
+                    <p class="tech-role">Deep multimodal visual reasoning + embedded real-time feature classifier.</p>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">🌐</span>
+                    <h3 class="tech-name">Digital Twin Engine</h3>
+                    <p class="tech-role">Discrete-event IoT sensor simulation &amp; vector route kinematics.</p>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">🧠</span>
+                    <h3 class="tech-name">Google Gemini 1.5</h3>
+                    <p class="tech-role">Autonomous generative agent synthesized with live city state telemetry.</p>
+                </div>
+                <div class="tech-card">
+                    <span class="tech-icon">⚡</span>
+                    <h3 class="tech-name">FastAPI / Flask</h3>
+                    <p class="tech-role">REST API endpoints &amp; real-time telemetry streaming.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-banner">
+        <div class="container">
+            <h2 class="cta-title">Ready to Experience the Waste Command Center?</h2>
+            <p class="cta-desc">
+                Launch the interactive command center to inspect 24 smart IoT bins, simulate dynamic fleet routing, and test live computer vision classification.
+            </p>
+            <div style="display: flex; gap: 16px; justify-content: center;">
+                <a href="/dashboard" class="btn btn-primary" style="padding: 14px 32px; font-size: 1.05rem;">
+                    🚀 Open Full Operational Command Center
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>EcoTwin 2.0</strong> &bull; Computer Vision &bull; Digital Twin Ecosystem &bull; Generative AI Operations</p>
+            <p style="margin-top: 6px; font-size: 0.75rem; color: var(--text-dim);">Developed for smart city municipal circular waste management and net-zero sustainability.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts for the Showcase Page -->
+    <script>
+        // Sample waste items database for the live demo
+        const demoSamples = {
+            pet: {
+                name: "Clear PET Mineral Water Bottle",
+                category: "Plastics",
+                subtype: "PET (#1 Polyethylene Terephthalate)",
+                confidence: 96,
+                isContam: false,
+                targetBin: "Blue / Yellow Bin (Clean Recyclables)",
+                prep: "Empty all liquids completely. Rinse lightly. Keep plastic cap attached.",
+                carbon: "0.032 kg CO₂e",
+                resale: "$0.0084",
+                score: 95,
+                svg: `<svg viewBox="0 0 100 100" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#0F172A" rx="12"/>
+                    <rect x="42" y="8" width="16" height="8" rx="2" fill="#0284C7"/>
+                    <path d="M40 16 L60 16 L66 30 L66 84 Q66 90 58 90 L42 90 Q34 90 34 84 L34 30 Z" fill="#38BDF8" fill-opacity="0.35" stroke="#38BDF8" stroke-width="2.5"/>
+                    <rect x="34" y="44" width="32" height="20" fill="#0284C7" fill-opacity="0.8"/>
+                    <text x="50" y="58" font-size="7" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">PET 1</text>
+                </svg>`
+            },
+            alu: {
+                name: "Crushed Aluminum Cola Can",
+                category: "Metals",
+                subtype: "UBC Aluminum (Infinitely Recyclable)",
+                confidence: 98,
+                isContam: false,
+                targetBin: "Yellow / Orange Bin (Metals)",
+                prep: "Empty liquid. 100% recyclable. Saves 95% energy vs. virgin bauxite smelting.",
+                carbon: "0.059 kg CO₂e",
+                resale: "$0.0175",
+                score: 100,
+                svg: `<svg viewBox="0 0 100 100" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#0F172A" rx="12"/>
+                    <ellipse cx="50" cy="22" rx="20" ry="6" fill="#CBD5E1" stroke="#94A3B8" stroke-width="2"/>
+                    <path d="M30 22 Q26 45 34 55 Q28 65 30 78 Q50 86 70 78 Q74 65 66 55 Q74 45 70 22 Z" fill="#EF4444" stroke="#DC2626" stroke-width="2"/>
+                    <text x="50" y="60" font-size="8" font-weight="900" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">ALU</text>
+                </svg>`
+            },
+            pizza: {
+                name: "Greasy Takeout Pizza Box",
+                category: "Paper & Cardboard",
+                subtype: "Food-Soiled Fiber (Contaminated)",
+                confidence: 94,
+                isContam: true,
+                targetBin: "Green Compost Bin or Residual",
+                prep: "CRITICAL: Bottom panel saturated with oil. Tear off clean top lid for paper recycling; place greasy bottom in organic compost.",
+                carbon: "0.135 kg CO₂e",
+                resale: "$0.0080",
+                score: 15,
+                svg: `<svg viewBox="0 0 100 100" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#0F172A" rx="12"/>
+                    <polygon points="50,15 88,32 88,72 50,88 12,72 12,32" fill="#D97706" stroke="#92400E" stroke-width="2"/>
+                    <ellipse cx="50" cy="55" rx="18" ry="10" fill="#78350F" fill-opacity="0.85"/>
+                    <text x="50" y="80" font-size="6" font-weight="bold" fill="#FEF3C7" text-anchor="middle" font-family="sans-serif">! GREASE CONTAMINATION !</text>
+                </svg>`
+            },
+            battery: {
+                name: "Swollen Lithium-Ion Battery Pack",
+                category: "E-Waste / Hazmat",
+                subtype: "Lithium-Ion Polymer (CRITICAL HAZARD)",
+                confidence: 99,
+                isContam: true,
+                targetBin: "Special EcoVault Hazardous Drop-off",
+                prep: "SEVERE FIRE HAZARD: Never put in municipal compactor bins. Tape terminals with electrical tape and deliver to certified e-waste depot.",
+                carbon: "0.382 kg CO₂e",
+                resale: "$0.1440",
+                score: 85,
+                svg: `<svg viewBox="0 0 100 100" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#0F172A" rx="12"/>
+                    <rect x="25" y="30" width="50" height="48" rx="6" fill="#334155" stroke="#EF4444" stroke-width="3"/>
+                    <polygon points="50,38 43,54 51,54 47,68 59,50 51,50" fill="#EF4444"/>
+                    <text x="50" y="86" font-size="6" font-weight="bold" fill="#F87171" text-anchor="middle" font-family="sans-serif">FIRE HAZARD</text>
+                </svg>`
+            },
+            chips: {
+                name: "Multi-layer Metallized Chip Bag",
+                category: "Landfill / Residual",
+                subtype: "Composite Foil & Polymer Laminate",
+                confidence: 92,
+                isContam: true,
+                targetBin: "Black / Dark Grey Bin (Residual)",
+                prep: "Non-separable in mechanical recycling. Direct to Waste-to-Energy (WtE) district heating.",
+                carbon: "0.000 kg CO₂e",
+                resale: "-$0.0015",
+                score: 5,
+                svg: `<svg viewBox="0 0 100 100" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="#0F172A" rx="12"/>
+                    <path d="M30 18 L70 18 L74 82 L26 82 Z" fill="#7C3AED" stroke="#C084FC" stroke-width="2"/>
+                    <text x="50" y="52" font-size="7" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">CHIPS</text>
+                </svg>`
+            }
+        };
+
+        function loadDemoSample(key) {
+            document.querySelectorAll('.demo-chip').forEach(c => c.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const item = demoSamples[key];
+            const viewport = document.getElementById('demo-cv-viewport');
+            const results = document.getElementById('demo-cv-results');
+
+            viewport.innerHTML = `
+                <div style="position: relative;">
+                    ${item.svg}
+                    <div style="position: absolute; inset: 10px; border: 2px dashed ${item.isContam ? '#EF4444' : '#10B981'}; border-radius: 8px; pointer-events: none;">
+                        <span style="position: absolute; top: -12px; left: 8px; background: ${item.isContam ? '#EF4444' : '#10B981'}; color: #FFF; font-size: 0.7rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;">
+                            ${item.category} (${item.confidence}%)
+                        </span>
+                    </div>
+                </div>
+            `;
+
+            results.innerHTML = `
+                <div>
+                    <span style="font-size: 0.72rem; font-weight: 700; color: ${item.isContam ? '#EF4444' : '#3B82F6'}; text-transform: uppercase;">
+                        ${item.isContam ? '⚠️ Contamination / Hazard Detected' : '✓ Verified Clean Stream'}
+                    </span>
+                    <h3 style="font-size: 1.25rem; font-weight: 800; margin-top: 2px;">${item.name}</h3>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">${item.subtype}</div>
+                </div>
+
+                <div style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px; border-left: 3px solid ${item.isContam ? '#EF4444' : '#10B981'};">
+                    <strong style="font-size: 0.78rem; color: ${item.isContam ? '#EF4444' : '#10B981'};">Citizen Segregation Instructions:</strong>
+                    <p style="font-size: 0.82rem; margin-top: 4px; color: var(--text-main);">${item.prep}</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.8rem;">
+                    <div style="background: var(--bg-elevated); padding: 8px 12px; border-radius: 6px;">
+                        <span style="color: var(--text-dim); display: block; font-size: 0.7rem;">Target Destination</span>
+                        <strong>${item.targetBin}</strong>
+                    </div>
+                    <div style="background: var(--bg-elevated); padding: 8px 12px; border-radius: 6px;">
+                        <span style="color: var(--text-dim); display: block; font-size: 0.7rem;">CO₂e Avoided</span>
+                        <strong style="color: var(--emerald);">${item.carbon}</strong>
+                    </div>
+                </div>
+            `;
+        }
+
+        function switchStudioTab(tabId) {
+            document.querySelectorAll('.studio-tab-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.querySelectorAll('.studio-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            if (tabId === 'twin-tab') {
+                initDemoTwinCanvas();
+            }
+        }
+
+        // Lightweight animated canvas for the landing page showcase
+        let twinAnimInit = false;
+        function initDemoTwinCanvas() {
+            if (twinAnimInit) return;
+            twinAnimInit = true;
+            const canvas = document.getElementById('demoTwinCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            const trucks = [
+                { x: 100, y: 150, tx: 550, ty: 150, color: '#3B82F6', name: 'TRUCK-01' },
+                { x: 550, y: 320, tx: 180, ty: 320, color: '#10B981', name: 'TRUCK-02' }
+            ];
+
+            const bins = [
+                { x: 160, y: 150, fill: 88, color: '#EF4444' },
+                { x: 300, y: 150, fill: 42, color: '#10B981' },
+                { x: 480, y: 150, fill: 74, color: '#F59E0B' },
+                { x: 220, y: 320, fill: 92, color: '#EF4444' },
+                { x: 420, y: 320, fill: 35, color: '#10B981' }
+            ];
+
+            function draw() {
+                ctx.fillStyle = '#080C14';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Road grid
+                ctx.strokeStyle = '#1E293B';
+                ctx.lineWidth = 10;
+                ctx.beginPath();
+                ctx.moveTo(80, 150); ctx.lineTo(620, 150);
+                ctx.moveTo(80, 320); ctx.lineTo(620, 320);
+                ctx.moveTo(250, 80); ctx.lineTo(250, 380);
+                ctx.moveTo(480, 80); ctx.lineTo(480, 380);
+                ctx.stroke();
+
+                // Bins
+                bins.forEach(b => {
+                    ctx.fillStyle = '#1E293B';
+                    ctx.beginPath();
+                    ctx.arc(b.x, b.y, 10, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.strokeStyle = b.color;
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(b.x, b.y, 10, 0, (b.fill / 100) * Math.PI * 2);
+                    ctx.stroke();
+                });
+
+                // Trucks moving
+                trucks.forEach(t => {
+                    t.x += (t.tx - t.x) * 0.02;
+                    if (Math.abs(t.tx - t.x) < 4) {
+                        t.tx = t.tx === 550 ? 100 : 550;
+                    }
+
+                    ctx.fillStyle = t.color;
+                    ctx.beginPath();
+                    ctx.roundRect(t.x - 12, t.y - 8, 24, 16, 4);
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
+        function triggerDemoDispatch() {
+            alert('CVRP Dynamic Route Optimization: TRUCK-01 dispatched along Sector 1 corridor. 2 critical bins queued.');
+        }
+
+        // ROI Calculator Logic
+        function updateCalculator() {
+            const pop = parseInt(document.getElementById('range-pop').value);
+            const fleet = parseInt(document.getElementById('range-fleet').value);
+            const rec = parseInt(document.getElementById('range-rec').value);
+
+            document.getElementById('val-pop').textContent = `${(pop / 1000).toFixed(0)}k citizens`;
+            document.getElementById('val-fleet').textContent = `${fleet} Trucks`;
+            document.getElementById('val-rec').textContent = `${rec}% Baseline`;
+
+            // Waste gen ~ 1.2 kg per capita per day
+            const annualWasteTons = (pop * 1.2 * 365) / 1000;
+            const newDiversionPct = Math.min(84, rec + 24.5);
+            const divertedTons = Math.round(annualWasteTons * (newDiversionPct / 100));
+            const co2Saved = Math.round(divertedTons * 1.35);
+            const fuelSaved = Math.round(fleet * 11700);
+            const resaleVal = (divertedTons * 79.5).toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
+            document.getElementById('calc-diverted').textContent = `+${divertedTons.toLocaleString()} t`;
+            document.getElementById('calc-carbon').textContent = `${co2Saved.toLocaleString()} tCO₂e`;
+            document.getElementById('calc-fuel').textContent = `$${fuelSaved.toLocaleString()}`;
+            document.getElementById('calc-revenue').textContent = resaleVal;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDemoSample('pet');
+            updateCalculator();
+        });
+    </script>
+</body>
+</html>

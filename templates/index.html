@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTwin | Smart Waste Vision & Digital Twin Ecosystem</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="theme-dark">
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+        <div class="header-left">
+            <div class="logo-group">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                        <circle cx="12" cy="12" r="5" fill="#10B981" fill-opacity="0.3"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="app-title">EcoTwin <span class="badge-v2">2.0</span></h1>
+                    <p class="app-subtitle">Computer Vision &bull; Digital Twin &bull; Generative AI</p>
+                </div>
+            </div>
+            
+            <nav class="nav-tabs">
+                <a href="/" class="nav-tab" style="text-decoration: none; border-right: 1px solid var(--border-color); padding-right: 12px; margin-right: 6px;" title="Back to Problem Statement & Website">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    Website
+                </a>
+                <button class="nav-tab active" data-tab="twin-view">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M2 12h20"/></svg>
+                    Digital Twin
+                </button>
+                <button class="nav-tab" data-tab="cv-view">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Computer Vision
+                </button>
+                <button class="nav-tab" data-tab="ai-view">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"/></svg>
+                    GenAI Recommendations
+                </button>
+                <button class="nav-tab" data-tab="analytics-view">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    Ecosystem Analytics
+                </button>
+            </nav>
+        </div>
+
+        <!-- Macro KPIs & Sim Controls -->
+        <div class="header-right">
+            <div class="kpi-mini-group">
+                <div class="kpi-mini-card">
+                    <span class="kpi-mini-label">Diversion Rate</span>
+                    <span class="kpi-mini-val text-emerald" id="hdr-diversion">78.8%</span>
+                </div>
+                <div class="kpi-mini-card">
+                    <span class="kpi-mini-label">CO₂ Mitigated</span>
+                    <span class="kpi-mini-val text-cyan" id="hdr-carbon">142.8 t</span>
+                </div>
+                <div class="kpi-mini-card">
+                    <span class="kpi-mini-label">Critical Bins</span>
+                    <span class="kpi-mini-val text-amber" id="hdr-critical-bins">2</span>
+                </div>
+                <div class="kpi-mini-card">
+                    <span class="kpi-mini-label">Active Fleet</span>
+                    <span class="kpi-mini-val text-blue" id="hdr-active-trucks">2 / 4</span>
+                </div>
+            </div>
+
+            <!-- Simulation Speed Controls -->
+            <div class="sim-controls">
+                <div class="btn-group-segmented">
+                    <button class="sim-speed-btn" data-speed="0">⏸</button>
+                    <button class="sim-speed-btn active" data-speed="1">1x</button>
+                    <button class="sim-speed-btn" data-speed="5">5x</button>
+                    <button class="sim-speed-btn" data-speed="15">15x</button>
+                </div>
+
+                <div class="dropdown-wrapper">
+                    <select id="scenario-select" class="select-scenario" title="Inject Scenario">
+                        <option value="Normal Operations">Scenario: Normal</option>
+                        <option value="Morning Rush Hour">⚡ Morning Rush Hour</option>
+                        <option value="Festival Surge (Bayside)">🎉 Festival Surge (Bayside)</option>
+                        <option value="Heavy Rain Contamination Event">🌧️ Rain Contamination Spike</option>
+                        <option value="Reset to Normal">🔄 Reset Ecosystem</option>
+                    </select>
+                </div>
+
+                <button class="btn-icon" id="open-key-modal" title="Configure Gemini API Key">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="app-body">
+        
+        <!-- ==================================================== -->
+        <!-- TAB 1: DIGITAL TWIN ECOSYSTEM                       -->
+        <!-- ==================================================== -->
+        <section id="twin-view" class="tab-panel active">
+            <div class="twin-layout">
+                <!-- Left/Center: Interactive Geospatial Canvas -->
+                <div class="twin-canvas-container">
+                    <div class="canvas-header-bar">
+                        <div class="badge-live-pulse">
+                            <span class="pulse-dot"></span> LIVE TWIN TELEMETRY
+                        </div>
+                        <div class="twin-legend">
+                            <span class="legend-item"><span class="dot normal"></span> Normal (&lt;70%)</span>
+                            <span class="legend-item"><span class="dot warning"></span> Warning (70-84%)</span>
+                            <span class="legend-item"><span class="dot critical"></span> Critical (&ge;85%)</span>
+                            <span class="legend-item"><span class="dot truck"></span> Fleet Truck</span>
+                            <span class="legend-item"><span class="dot facility"></span> Facility</span>
+                        </div>
+                        <div class="canvas-actions">
+                            <button id="btn-auto-dispatch" class="btn btn-primary btn-sm">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                                Auto-Dispatch Fleet
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="canvas-wrapper">
+                        <canvas id="digitalTwinCanvas" width="800" height="640"></canvas>
+                        <div id="twin-tooltip" class="twin-tooltip hidden"></div>
+                    </div>
+
+                    <!-- Bottom Fleet Telemetry strip -->
+                    <div class="fleet-strip" id="fleet-strip">
+                        <!-- Rendered dynamically by twin_view.js -->
+                    </div>
+                </div>
+
+                <!-- Right Sidebar: Sector Stats, Inspector & Alerts -->
+                <div class="twin-sidebar">
+                    <!-- Entity Inspector Card -->
+                    <div class="panel-card" id="inspector-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Entity Telemetry Inspector</h3>
+                            <span class="badge" id="inspector-badge">Select Node</span>
+                        </div>
+                        <div class="card-body" id="inspector-body">
+                            <div class="inspector-placeholder">
+                                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#64748B" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="m10 15 5-3-5-3v6z"/></svg>
+                                <p>Click any <strong>Smart Bin</strong>, <strong>Fleet Truck</strong>, or <strong>Processing Facility</strong> on the map to inspect live IoT sensor streams.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Facilities Status -->
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Processing Facilities</h3>
+                        </div>
+                        <div class="facility-list" id="facility-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Active System Alerts -->
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Active Anomaly Alerts</h3>
+                            <span class="badge badge-danger" id="alert-count-badge">0</span>
+                        </div>
+                        <div class="alert-list" id="alert-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- TAB 2: COMPUTER VISION SORTER                       -->
+        <!-- ==================================================== -->
+        <section id="cv-view" class="tab-panel">
+            <div class="cv-layout">
+                <!-- Left: Input & Detection Viewport -->
+                <div class="cv-viewport-card panel-card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Computer Vision Waste Classifier</h3>
+                            <p class="card-subtitle">Real-time object localization, polymer identification, and contamination scanning</p>
+                        </div>
+                        <div class="cv-input-mode-toggle">
+                            <button class="btn btn-sm btn-outline active" id="btn-mode-samples">Sample Gallery</button>
+                            <button class="btn btn-sm btn-outline" id="btn-mode-upload">File Upload</button>
+                            <button class="btn btn-sm btn-outline" id="btn-mode-webcam">Live Webcam</button>
+                        </div>
+                    </div>
+
+                    <div class="cv-stage-area">
+                        <!-- Canvas / Viewport Overlay -->
+                        <div class="cv-canvas-wrap">
+                            <div id="cv-preview-container" class="cv-preview-container">
+                                <!-- Dynamic SVG or Image rendered here -->
+                                <div id="cv-placeholder-art" class="cv-placeholder-art">
+                                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#64748B" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <p>Select a test sample below, drop an image, or activate your webcam</p>
+                                </div>
+                            </div>
+                            <!-- Bounding box overlay layer -->
+                            <div id="cv-bbox-overlay" class="cv-bbox-overlay"></div>
+                        </div>
+
+                        <!-- Webcam View (hidden by default) -->
+                        <div id="webcam-box" class="webcam-box hidden">
+                            <video id="webcam-video" autoplay playsinline></video>
+                            <div class="webcam-actions">
+                                <button id="btn-capture-webcam" class="btn btn-primary">📸 Capture Frame</button>
+                                <button id="btn-stop-webcam" class="btn btn-secondary">Stop Camera</button>
+                            </div>
+                        </div>
+
+                        <!-- File Upload Dropzone (hidden by default) -->
+                        <div id="upload-box" class="upload-box hidden">
+                            <input type="file" id="file-input" accept="image/*" class="file-input-hidden">
+                            <div class="dropzone" id="dropzone">
+                                <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#38BDF8" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                <p><strong>Drag & Drop waste photo here</strong>, or <em>click to browse</em></p>
+                                <span class="text-muted text-xs">Supports PNG, JPG, WEBP, HEIC</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1-Click Sample Items Carousel/Grid -->
+                    <div class="samples-gallery-tray" id="samples-gallery-tray">
+                        <div class="tray-label">⚡ Click any sample to run Computer Vision classification:</div>
+                        <div class="samples-scroll" id="samples-scroll">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Vision Analysis Results Card -->
+                <div class="cv-results-card panel-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Vision Inference Telemetry</h3>
+                        <span class="badge badge-info" id="cv-engine-badge">Model Ready</span>
+                    </div>
+
+                    <div class="cv-results-body" id="cv-results-body">
+                        <!-- Detected Header -->
+                        <div class="result-hero-box">
+                            <div class="result-cat-tag" id="res-category">Plastics</div>
+                            <h2 class="result-item-name" id="res-item-name">Clear PET Water Bottle</h2>
+                            <div class="result-meta-row">
+                                <span class="badge" id="res-subtype">PET (#1)</span>
+                                <span class="badge" id="res-confidence">Confidence: 96%</span>
+                                <span class="badge badge-success" id="res-contamination-badge">Clean</span>
+                            </div>
+                        </div>
+
+                        <!-- Recyclability Score Gauge -->
+                        <div class="score-card">
+                            <div class="score-header">
+                                <span>Recyclability Potential</span>
+                                <strong id="res-score-pct">95%</strong>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="res-score-bar" style="width: 95%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Preparation & Citizen Segregation Instructions -->
+                        <div class="instruction-box">
+                            <div class="instruction-title">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#10B981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                                Citizen Segregation Protocol:
+                            </div>
+                            <p id="res-prep-text">Empty liquid completely, rinse, keep plastic cap on or flatten.</p>
+                            <div class="bin-destination">
+                                <span>Target Receptacle:</span>
+                                <strong id="res-target-bin" class="target-bin-pill">Blue Bin</strong>
+                            </div>
+                        </div>
+
+                        <!-- Contamination & Hazard Warnings -->
+                        <div class="contamination-alert-box" id="res-contam-box">
+                            <div class="contam-title">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#F59E0B" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                Contamination Analysis
+                            </div>
+                            <p id="res-contam-notes">No contamination detected.</p>
+                        </div>
+
+                        <!-- Circular Economy & Carbon Metrics -->
+                        <div class="impact-metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-label">Carbon Offset</span>
+                                <strong class="metric-val text-emerald" id="res-carbon">0.032 kg CO₂e</strong>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Commodity Resale</span>
+                                <strong class="metric-val text-cyan" id="res-val">$0.0084</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Industrial MRF Conveyor Stream Simulator Accordion -->
+                    <div class="mrf-conveyor-card">
+                        <div class="card-header-inner">
+                            <h4>🏭 Industrial MRF Optical Sorter Stream</h4>
+                            <button id="btn-toggle-conveyor" class="btn btn-xs btn-outline">▶ Start Optical Stream</button>
+                        </div>
+                        <div class="conveyor-display" id="conveyor-display">
+                            <div class="conveyor-belt">
+                                <div class="conveyor-item" id="conveyor-active-item">
+                                    <span>Stream Standing By...</span>
+                                </div>
+                                <div class="laser-scanner-line"></div>
+                            </div>
+                            <div class="conveyor-stats">
+                                <span>Throughput: <strong id="conveyor-count">0</strong> items</span>
+                                <span>Ejected Contaminants: <strong id="conveyor-ejected" class="text-amber">0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- TAB 3: GENERATIVE AI RECOMMENDATIONS & COPILOT      -->
+        <!-- ==================================================== -->
+        <section id="ai-view" class="tab-panel">
+            <div class="ai-layout">
+                <!-- Left: 4 Strategic AI Recommendation Cards -->
+                <div class="recs-column">
+                    <div class="recs-header">
+                        <div>
+                            <h2 class="section-title">Generative AI Operations Strategy</h2>
+                            <p class="section-subtitle">Real-time contextual optimizations for segregation, routes, and circular valorization</p>
+                        </div>
+                        <button id="btn-refresh-recs" class="btn btn-primary">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                            Regenerate AI Strategy
+                        </button>
+                    </div>
+
+                    <div class="recs-grid" id="recs-grid">
+                        <!-- Populated dynamically with 4 cards -->
+                    </div>
+                </div>
+
+                <!-- Right: Interactive EcoTwin Copilot Chatbot -->
+                <div class="copilot-column panel-card">
+                    <div class="card-header">
+                        <div class="copilot-header-info">
+                            <div class="copilot-avatar">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5 8 12 8 12s8-7 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="card-title">EcoTwin Copilot</h3>
+                                <p class="card-subtitle">Grounded in Live Digital Twin Telemetry</p>
+                            </div>
+                        </div>
+                        <span class="badge badge-success">Online</span>
+                    </div>
+
+                    <!-- Chat Messages Log -->
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-bubble copilot-msg">
+                            <div class="bubble-sender">EcoTwin Copilot &bull; Agent</div>
+                            <div class="bubble-content">
+                                Hello! I am your AI Municipal Waste Engineer. I monitor all 24 smart IoT bins, 4 collection trucks, and facility throughput in real time.<br><br>
+                                How can I assist you today? You can ask me to evaluate <strong>overflow risks</strong>, <strong>dispatch trucks</strong>, or <strong>analyze contamination patterns</strong>.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Prompt Suggestions -->
+                    <div class="quick-prompts-tray">
+                        <button class="quick-prompt-btn" data-prompt="Which sector has the highest contamination rate and what is the root cause?">⚠️ Contamination Hotspots</button>
+                        <button class="quick-prompt-btn" data-prompt="Dispatch EcoTruck-01 to collect all bins currently exceeding 80% capacity.">🚛 Optimize Route Dispatch</button>
+                        <button class="quick-prompt-btn" data-prompt="What is the secondary market economic value of clean PET and HDPE plastic flakes?">💰 Recycling Economics</button>
+                        <button class="quick-prompt-btn" data-prompt="How does the system isolate lithium-ion battery fire hazards?">🔥 Fire Hazard Containment</button>
+                    </div>
+
+                    <!-- Chat Input Bar -->
+                    <form id="chat-form" class="chat-input-bar">
+                        <input type="text" id="chat-input" placeholder="Ask EcoTwin Copilot anything about city waste operations..." autocomplete="off">
+                        <button type="submit" class="btn btn-primary" id="btn-send-chat">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================== -->
+        <!-- TAB 4: ECOSYSTEM ANALYTICS & CIRCULAR KPIS          -->
+        <!-- ==================================================== -->
+        <section id="analytics-view" class="tab-panel">
+            <div class="analytics-layout">
+                <!-- Top KPI Stat Cards -->
+                <div class="analytics-stat-row">
+                    <div class="panel-card stat-card">
+                        <span class="stat-label">Landfill Diversion Rate</span>
+                        <h2 class="stat-val text-emerald" id="stat-diversion">78.8%</h2>
+                        <span class="stat-sub text-muted">+4.2% vs. regional baseline</span>
+                    </div>
+                    <div class="panel-card stat-card">
+                        <span class="stat-label">Total Diverted Waste</span>
+                        <h2 class="stat-val text-blue" id="stat-diverted-tons">98.2 Tons</h2>
+                        <span class="stat-sub text-muted">Out of 124.6 Tons collected</span>
+                    </div>
+                    <div class="panel-card stat-card">
+                        <span class="stat-label">Greenhouse Gas Mitigated</span>
+                        <h2 class="stat-val text-cyan" id="stat-carbon">142.8 tCO₂e</h2>
+                        <span class="stat-sub text-muted">Equivalent to 310 cars removed</span>
+                    </div>
+                    <div class="panel-card stat-card">
+                        <span class="stat-label">Overflow Incidents Prevented</span>
+                        <h2 class="stat-val text-amber" id="stat-overflows">46</h2>
+                        <span class="stat-sub text-muted">Via predictive CVRP routing</span>
+                    </div>
+                </div>
+
+                <div class="analytics-grid-two">
+                    <!-- Stream Breakdown -->
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Waste Stream Material Composition</h3>
+                        </div>
+                        <div class="stream-bars-list" id="stream-bars-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Sector Performance Matrix -->
+                    <div class="panel-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Municipal Sector Performance Matrix</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sector</th>
+                                        <th>Avg Fill</th>
+                                        <th>Contamination</th>
+                                        <th>Critical Bins</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sector-table-body">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4-Hour Predictive Risk Forecast -->
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Predictive Bin Overflow Risk Forecast (Next 2-8 Hours)</h3>
+                        <span class="badge badge-info">AI Predictive Model</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Bin ID</th>
+                                    <th>Sector</th>
+                                    <th>Waste Stream</th>
+                                    <th>Current Fill</th>
+                                    <th>Est. Hours to Overflow</th>
+                                    <th>4-Hour Risk Level</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="overflow-table-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Gemini API Key Configuration Modal -->
+    <div id="key-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Google Gemini API Configuration</h3>
+                <button id="close-key-modal" class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Provide your Google Gemini API Key to enable multimodal deep visual inference and Gemini 1.5 Flash agent reasoning. <em>(If left empty, EcoTwin operates with its built-in high-precision neural feature classifier and autonomous contextual engine).</em></p>
+                <div class="form-group">
+                    <label for="gemini-key-input">Gemini API Key:</label>
+                    <input type="password" id="gemini-key-input" placeholder="AIzaSy..." class="form-control">
+                </div>
+                <div id="key-status-msg" class="text-sm"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="btn-save-key" class="btn btn-primary">Save Key</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/cv_view.js"></script>
+    <script src="/static/js/twin_view.js"></script>
+    <script src="/static/js/copilot_view.js"></script>
+</body>
+</html>
